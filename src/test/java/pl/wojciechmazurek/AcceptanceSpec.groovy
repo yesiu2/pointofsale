@@ -12,34 +12,9 @@ import spock.lang.Specification
 
 import static org.assertj.core.api.Assertions.*
 
-class AcceptanceSpec extends Specification {
-
-    BarCodeScanner scanner
-    ProductRepository repository
-    LCDDisplay lcdDisplay
-    PointOfSale pointOfSale
+class AcceptanceSpec extends SetupSpec {
 
 
-    def setup() {
-        scanner = new BarCodeScannerStub()
-
-        repository = new ProductRepositoryStub()
-
-        Product banana = new Product("banana", new BigDecimal(2.9))
-        Product game = new Product("game", new BigDecimal(124.50))
-        Product book = new Product("book", new BigDecimal(49.25))
-
-        repository.save(1L, banana)
-        repository.save(2L, game)
-        repository.save(3L, book)
-
-
-        lcdDisplay = Mock(LCDDisplay.class)
-
-        pointOfSale = new PointOfSale(lcdDisplay, scanner, repository)
-
-
-    }
 
     def "single product sale"() {
 
@@ -60,7 +35,13 @@ class AcceptanceSpec extends Specification {
 
         then: 'its name and price is printed on LCD display'
 
-        1 * lcdDisplay.display("game 124.5")
+        1 * lcdDisplay.display({
+            with(it){
+                contains("game")
+                contains("124.5")
+            }
+            true
+        })
 
 
         when: 'product is not found in products database'

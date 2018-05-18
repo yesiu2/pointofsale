@@ -18,10 +18,6 @@ public class PointOfSale {
         this.productRepository = productRepository;
     }
 
-    public LCDDisplay getLcdDisplay() {
-        return lcdDisplay;
-    }
-
     public Long scanBarCode() {
 
         return barCodeScanner.scan();
