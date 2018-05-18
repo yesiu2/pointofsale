@@ -65,7 +65,13 @@ class AcceptanceSpec extends Specification {
 
         when: 'product is not found in products database'
 
+       Product notFoundProduct =  pointOfSale.findProduct(18L)
+
+        assertThat(notFoundProduct).isNull()
+
         then: 'error message "Product not found" is printed on LCD display'
+
+        1 * lcdDisplay.display("Product not found")
 
         when: 'scanned code is empty'
 
