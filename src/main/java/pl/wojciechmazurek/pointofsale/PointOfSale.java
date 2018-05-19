@@ -24,10 +24,22 @@ public class PointOfSale {
     }
 
     public Product findProduct(Long barCode) {
-        return productRepository.findByBarCode(barCode);
+
+        Product product = productRepository.findByBarCode(barCode);
+
+        if (product != null) {
+            displayNameAndPriceOnLCD(product);
+        } else {
+            displayNotFoundMessage();
+        }
+        return product;
     }
 
-    public void displayNameAndPriceOnLCD(Product product) {
+    private void displayNotFoundMessage() {
+        lcdDisplay.display("Product not found");
+    }
+
+    private void displayNameAndPriceOnLCD(Product product) {
         String message = product.getName() + " " + product.getPrice().toString();
 
         lcdDisplay.display(message);

@@ -1,16 +1,8 @@
 package pl.wojciechmazurek
 
-import pl.wojciechmazurek.display.LCDDisplay
-import pl.wojciechmazurek.pointofsale.PointOfSale
 import pl.wojciechmazurek.product.Product
-import pl.wojciechmazurek.product.ProductRepository
-import pl.wojciechmazurek.scanner.BarCodeScanner
-import pl.wojciechmazurek.stubs.BarCodeScannerStub
-import pl.wojciechmazurek.stubs.LCDDisplayStub
-import pl.wojciechmazurek.stubs.ProductRepositoryStub
-import spock.lang.Specification
-
 import static org.assertj.core.api.Assertions.*
+
 
 class AcceptanceSpec extends SetupSpec {
 
@@ -30,8 +22,6 @@ class AcceptanceSpec extends SetupSpec {
         assertThat(foundProduct).isNotNull()
         assertThat(foundProduct.getName().is("game"))
         assertThat(foundProduct.getPrice() == new BigDecimal(124.50))
-
-        pointOfSale.displayNameAndPriceOnLCD(foundProduct)
 
         then: 'its name and price is printed on LCD display'
 
