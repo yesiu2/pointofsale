@@ -56,6 +56,23 @@ class AcceptanceSpec extends SetupSpec {
 
         when: 'exit is input'
 
+        pointOfSale.exit()
+
         then: 'printer prints receipt with all scanned products, prices and sum. Sum is displayed on LCD'
+
+        1 * printer.printReceipt({
+            with(it) {
+                contains("game")
+                contains("banana")
+                contains("book")
+                contains("124.5")
+                contains("2.9")
+                contains("49.25")
+                contains("176.25") // sum of all products
+            }
+            true
+        })
+
+        1 * lcdDisplay.display("176.25")
     }
 }

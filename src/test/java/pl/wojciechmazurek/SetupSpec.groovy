@@ -23,7 +23,7 @@ abstract class SetupSpec extends Specification {
 
         repository = new ProductRepositoryStub()
 
-        Product banana = new Product("banana", new BigDecimal(2.9))
+        Product banana = new Product("banana", new BigDecimal(2.90))
         Product game = new Product("game", new BigDecimal(124.50))
         Product book = new Product("book", new BigDecimal(49.25))
 
