@@ -7,4 +7,5 @@ public class BarCodeScannerStub implements BarCodeScanner {
     public Long scan() {
         return 2L;
     }
+
 }

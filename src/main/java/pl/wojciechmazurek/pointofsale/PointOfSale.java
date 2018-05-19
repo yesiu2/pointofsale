@@ -25,14 +25,25 @@ public class PointOfSale {
 
     public Product findProduct(Long barCode) {
 
+        // IMO this null validation should be in scanBarCode method, but I havent got idea how to test it
+        if (barCode == null) {
+            displayInvalidBarCodeMessage();
+            return null;
+        }
+
         Product product = productRepository.findByBarCode(barCode);
 
         if (product != null) {
             displayNameAndPriceOnLCD(product);
         } else {
             displayNotFoundMessage();
+            return null;
         }
         return product;
+    }
+
+    private void displayInvalidBarCodeMessage() {
+        lcdDisplay.display("Invalid bar-code");
     }
 
     private void displayNotFoundMessage() {

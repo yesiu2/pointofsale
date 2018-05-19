@@ -1,6 +1,8 @@
 package pl.wojciechmazurek
 
 import pl.wojciechmazurek.product.Product
+import pl.wojciechmazurek.stubs.BarCodeScannerStub
+
 import static org.assertj.core.api.Assertions.*
 
 
@@ -46,7 +48,11 @@ class AcceptanceSpec extends SetupSpec {
 
         when: 'scanned code is empty'
 
-        then: 'error message "Invalid bar code is printed on LCD display'
+        pointOfSale.findProduct(null)
+
+        then: 'error message "Invalid bar-code is printed on LCD display'
+
+        1 * lcdDisplay.display("Invalid bar-code")
 
         when: 'exit is input'
 

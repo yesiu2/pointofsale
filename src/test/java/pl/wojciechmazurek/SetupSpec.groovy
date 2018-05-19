@@ -6,13 +6,14 @@ import pl.wojciechmazurek.product.Product
 import pl.wojciechmazurek.product.ProductRepository
 import pl.wojciechmazurek.scanner.BarCodeScanner
 import pl.wojciechmazurek.stubs.BarCodeScannerStub
+import pl.wojciechmazurek.stubs.LCDDisplayStub
 import pl.wojciechmazurek.stubs.ProductRepositoryStub
 import spock.lang.Specification
 
 abstract class SetupSpec extends Specification {
 
-    BarCodeScanner scanner
-    ProductRepository repository
+    BarCodeScannerStub scanner
+    ProductRepositoryStub repository
     LCDDisplay lcdDisplay
     PointOfSale pointOfSale
 
@@ -34,6 +35,8 @@ abstract class SetupSpec extends Specification {
         lcdDisplay = Mock(LCDDisplay.class)
 
         pointOfSale = new PointOfSale(lcdDisplay, scanner, repository)
+
+
 
 
     }
