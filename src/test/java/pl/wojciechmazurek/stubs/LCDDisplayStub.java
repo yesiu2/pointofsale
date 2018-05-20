@@ -8,4 +8,6 @@ public class LCDDisplayStub implements LCDDisplay {
     public void display(String message) {
         System.out.println(message);
     }
+
+
 }

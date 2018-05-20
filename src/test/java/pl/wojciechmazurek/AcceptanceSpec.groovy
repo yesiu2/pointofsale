@@ -56,9 +56,20 @@ class AcceptanceSpec extends SetupSpec {
 
         when: 'exit is input'
 
-        pointOfSale.exit()
+        Scanner exitInput = new Scanner("exit")
+        Scanner nonExitInput = new Scanner("other")
+
+
+        boolean exitBool = pointOfSale.checkExitCondition(exitInput)
+        boolean nonExitBool = pointOfSale.checkExitCondition(nonExitInput)
+
+        pointOfSale.doTransaction(transaction, testScanner)
 
         then: 'printer prints receipt with all scanned products, prices and sum. Sum is displayed on LCD'
+
+
+        assertThat(exitBool).isTrue()
+        assertThat(nonExitBool).isFalse()
 
         1 * printer.printReceipt({
             with(it) {
@@ -68,11 +79,13 @@ class AcceptanceSpec extends SetupSpec {
                 contains("124.5")
                 contains("2.9")
                 contains("49.25")
-                contains("176.25") // sum of all products
+                contains("176.65") // sum of all products
             }
             true
         })
 
-        1 * lcdDisplay.display("176.25")
+        1 * lcdDisplay.display("176.65")
+
+
     }
 }

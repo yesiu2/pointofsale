@@ -2,11 +2,10 @@ package pl.wojciechmazurek
 
 import pl.wojciechmazurek.display.LCDDisplay
 import pl.wojciechmazurek.pointofsale.PointOfSale
+import pl.wojciechmazurek.pointofsale.Transaction
+import pl.wojciechmazurek.printer.Printer
 import pl.wojciechmazurek.product.Product
-import pl.wojciechmazurek.product.ProductRepository
-import pl.wojciechmazurek.scanner.BarCodeScanner
 import pl.wojciechmazurek.stubs.BarCodeScannerStub
-import pl.wojciechmazurek.stubs.LCDDisplayStub
 import pl.wojciechmazurek.stubs.ProductRepositoryStub
 import spock.lang.Specification
 
@@ -16,6 +15,9 @@ abstract class SetupSpec extends Specification {
     ProductRepositoryStub repository
     LCDDisplay lcdDisplay
     PointOfSale pointOfSale
+    Printer printer
+    Transaction transaction
+    Scanner testScanner
 
 
     def setup() {
@@ -34,7 +36,18 @@ abstract class SetupSpec extends Specification {
 
         lcdDisplay = Mock(LCDDisplay.class)
 
-        pointOfSale = new PointOfSale(lcdDisplay, scanner, repository)
+        pointOfSale = new PointOfSale(lcdDisplay, scanner, repository, printer)
+
+        List<Product> boughtProducts = new ArrayList<>()
+        boughtProducts.add(banana)
+        boughtProducts.add(game)
+        boughtProducts.add(book)
+
+        BigDecimal sum = BigDecimal.ZERO
+
+        transaction = new Transaction(boughtProducts, sum)
+
+        testScanner = new Scanner("exit")
 
 
 
