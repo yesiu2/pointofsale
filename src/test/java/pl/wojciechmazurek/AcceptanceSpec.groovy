@@ -30,7 +30,7 @@ class AcceptanceSpec extends SetupSpec {
         1 * lcdDisplay.display({
             with(it){
                 contains("game")
-                contains("124.5")
+                contains("124.50")
             }
             true
         })
@@ -77,7 +77,7 @@ class AcceptanceSpec extends SetupSpec {
                 contains("banana")
                 contains("book")
                 contains("124.5")
-                contains("2.9")
+                contains("2.90")
                 contains("49.25")
                 contains("176.65") // sum of all products
             }

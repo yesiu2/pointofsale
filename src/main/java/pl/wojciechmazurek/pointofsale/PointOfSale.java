@@ -6,9 +6,7 @@ import pl.wojciechmazurek.product.Product;
 import pl.wojciechmazurek.product.ProductRepository;
 import pl.wojciechmazurek.scanner.BarCodeScanner;
 
-import java.io.InputStream;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -71,16 +69,25 @@ public class PointOfSale {
     private StringBuilder makeReceipt(List<Product> boughtProducts, BigDecimal sum) {
         StringBuilder sb = new StringBuilder();
 
+        String result = bigDecimalToFormattedString(sum);
         boughtProducts.stream()
-                .forEach(p -> sb.append(p.getName().concat(" ").concat(p.getPrice().toString()).concat("\n")));
+                .forEach(p -> sb.append(p.getName().concat(" ").concat(bigDecimalToFormattedString(p.getPrice())).concat("\n")));
 
-        sb.append("-------");
-        sb.append("sum: ").append(sum.toString());
+        sb.append("-------" + "\n");
+        sb.append("sum: ").append(result);
         return sb;
     }
 
+    private String bigDecimalToFormattedString(BigDecimal sum) {
+        sum = sum.setScale(2, BigDecimal.ROUND_HALF_UP);
+
+        return sum.toString();
+    }
+
     private void displaySumOnLCDDisplay(BigDecimal sum) {
-        lcdDisplay.display(sum.toString());
+
+        String result = bigDecimalToFormattedString(sum);
+        lcdDisplay.display(result);
 
     }
 
@@ -135,7 +142,9 @@ public class PointOfSale {
     }
 
     private void displayNameAndPriceOnLCD(Product product) {
-        String message = product.getName() + " " + product.getPrice().toString();
+
+        String price = bigDecimalToFormattedString(product.getPrice());
+        String message = product.getName() + " " + price;
 
         lcdDisplay.display(message);
     }

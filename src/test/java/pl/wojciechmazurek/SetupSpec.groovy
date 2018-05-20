@@ -6,6 +6,7 @@ import pl.wojciechmazurek.pointofsale.Transaction
 import pl.wojciechmazurek.printer.Printer
 import pl.wojciechmazurek.product.Product
 import pl.wojciechmazurek.stubs.BarCodeScannerStub
+import pl.wojciechmazurek.stubs.PrinterStub
 import pl.wojciechmazurek.stubs.ProductRepositoryStub
 import spock.lang.Specification
 
@@ -24,6 +25,8 @@ abstract class SetupSpec extends Specification {
         scanner = new BarCodeScannerStub()
 
         repository = new ProductRepositoryStub()
+
+        printer = Mock(Printer.class)
 
         Product banana = new Product("banana", new BigDecimal(2.90))
         Product game = new Product("game", new BigDecimal(124.50))
