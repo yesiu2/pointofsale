@@ -3,7 +3,6 @@ package pl.wojciechmazurek.pointofsale;
 import pl.wojciechmazurek.product.Product;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Transaction {

@@ -6,7 +6,6 @@ import pl.wojciechmazurek.pointofsale.Transaction
 import pl.wojciechmazurek.printer.Printer
 import pl.wojciechmazurek.product.Product
 import pl.wojciechmazurek.stubs.BarCodeScannerStub
-import pl.wojciechmazurek.stubs.PrinterStub
 import pl.wojciechmazurek.stubs.ProductRepositoryStub
 import spock.lang.Specification
 

@@ -3,7 +3,6 @@ package pl.wojciechmazurek.stubs;
 import pl.wojciechmazurek.product.Product;
 import pl.wojciechmazurek.product.ProductRepository;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
